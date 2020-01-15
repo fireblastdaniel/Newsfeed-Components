@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'This is My Test Article -- Will it Work?',
+    date: 'Jan 15th, 2020',
+    firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat nisl quam, a vehicula elit rutrum et. Phasellus molestie lobortis arcu ac facilisis. Nullam id luctus nisl, mollis efficitur augue. Nulla vulputate quis mauris non consequat. Maecenas sit amet dolor a enim sagittis pulvinar gravida sit amet risus. Quisque quis turpis nec purus posuere semper eu ut lectus. Sed ornare sapien at venenatis ultricies. Quisque pellentesque mauris id gravida facilisis. Proin mattis varius metus. Vivamus metus nulla, efficitur in semper sit amet, ullamcorper id lectus. Ut mattis neque nisl, nec malesuada nisi venenatis vel. Nam ornare enim ut pellentesque mattis. Proin ac erat eu arcu ornare condimentum at sit amet est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;',
+    secondParagraph: 'Nam a elit vel leo ornare tincidunt. Nam faucibus pharetra quam in volutpat. Ut sodales tempor rutrum. Mauris viverra lorem vel quam fermentum finibus eu sit amet enim. Vestibulum et ante neque. Mauris posuere odio vitae vehicula ultrices. Fusce sit amet sodales ipsum. Curabitur maximus commodo orci. Vivamus nec metus nec urna feugiat porttitor pretium quis ex. Mauris tincidunt sapien vitae est placerat, eu congue nulla condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla dapibus lobortis bibendum. Sed condimentum libero quis mauris laoreet, id blandit metus ullamcorper. Ut viverra euismod ultrices. Sed semper, tellus bibendum sodales semper, dui justo posuere sem, nec feugiat nunc risus in leo. Praesent eget accumsan ex, in dictum ex.',
+    thirdParagraph: 'Phasellus justo risus, pulvinar non arcu nec, gravida porttitor ipsum. Vivamus et urna accumsan, pellentesque ex non, congue ligula. Aenean eu justo ac est malesuada ultrices posuere et mauris. Suspendisse fermentum ante convallis orci semper sollicitudin. Sed at leo finibus, malesuada risus non, sodales mauris. Quisque bibendum elementum lectus, vel ultricies tortor dapibus ac. Praesent in malesuada turpis. Cras tortor purus, vehicula id tortor et, condimentum lacinia nulla. Ut gravida augue ipsum, id faucibus felis tristique in. Cras risus leo, finibus sit amet auctor sed, tempus quis enim. Vivamus eu velit sit amet tellus interdum ullamcorper. Integer lobortis mauris molestie ex vestibulum, non feugiat justo placerat. Pellentesque quis lectus porta, blandit nisl faucibus, placerat dolor.'
   }
 ];
 
@@ -112,3 +119,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArcticle(title, date, p1, p2, p3){
+  //create all elements for article
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articlep1 = document.createElement('p');
+  const articlep2 = document.createElement('p');
+  const articlep3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  //add necessary class elements
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  //set text
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articlep1.textContent = p1;
+  articlep2.textContent = p2;
+  articlep3.textContent = p3;
+  expandButton.textContent = 'Expand'
+
+  //construct article structure
+  article.append(articleTitle);
+  article.append(articleDate);
+  article.append(articlep1);
+  article.append(articlep2);
+  article.append(articlep3);
+  article.append(expandButton);
+
+  //add expand button event listener
+  expandButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  })
+
+  return article;
+}
+
+const articles = document.querySelector('.articles');
+data.forEach( item => {
+  articles.append(createArcticle(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph));
+})
